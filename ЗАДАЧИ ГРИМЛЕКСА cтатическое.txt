@@ -1,0 +1,47 @@
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    const int m = 2; // Количество строк
+    const int n = 2; // Количество столбцов
+
+    // Создаем статические матрицы Arr1 и Arr2
+    int Arr1[m][n];
+    int Arr2[m][n];
+
+    // Заполняем Arr1
+    cout << "Введите элементы матрицы Arr1:" << endl;
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            cin >> Arr1[i][j];
+        }
+    }
+
+    // Заполняем Arr2
+    cout << "Введите элементы матрицы Arr2:" << endl;
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            cin >> Arr2[i][j];
+        }
+    }
+
+    // Создаем новую статическую матрицу result как разность Arr1 и Arr2
+    int result[m][n];
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            result[i][j] = Arr1[i][j] - Arr2[i][j];
+        }
+    }
+
+    // Выводим результат
+    cout << "Результат (матрица result):" << endl;
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            cout << result[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
