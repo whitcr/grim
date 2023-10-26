@@ -9,11 +9,9 @@ int main() {
     cin >> m;
     cout << "Введите количество столбцов (n): ";
     cin >> n;
-
     // Создаем матрицы Arr1 и Arr2
     vector<vector<int>> Arr1(m, vector<int>(n));
     vector<vector<int>> Arr2(m, vector<int>(n));
-
     // Заполняем Arr1
     cout << "Введите элементы матрицы Arr1:" << endl;
     for (int i = 0; i < m; i++) {
@@ -21,7 +19,6 @@ int main() {
             cin >> Arr1[i][j];
         }
     }
-
     // Заполняем Arr2
     cout << "Введите элементы матрицы Arr2:" << endl;
     for (int i = 0; i < m; i++) {
@@ -29,7 +26,6 @@ int main() {
             cin >> Arr2[i][j];
         }
     }
-
     // Создаем новую матрицу result как разность Arr1 и Arr2
     vector<vector<int>> result(m, vector<int>(n));
     for (int i = 0; i < m; i++) {
@@ -37,7 +33,6 @@ int main() {
             result[i][j] = Arr1[i][j] - Arr2[i][j];
         }
     }
-
     // Выводим результат
     cout << "Результат (матрица result):" << endl;
     for (int i = 0; i < m; i++) {
@@ -46,6 +41,5 @@ int main() {
         }
         cout << endl;
     }
-
     return 0;
 }
