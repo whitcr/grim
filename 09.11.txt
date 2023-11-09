@@ -1,0 +1,37 @@
+#include <iostream>
+#include <string>
+#include <cstring>
+using namespace std;
+
+int main() {
+    const int I = 2, J = 20;
+    char mas[][I][J] = {
+        "BOOK", "BLACK",
+        "COPYBOOK", "YELLOW",
+        "PEN", "RED",
+        "NOTEBOOK", "WHITE",
+        "PENSIL", "RED",
+        "PEN", "YELLOW",
+        "TEXTBOOK", "PINK",
+        "ERASER", "GREEN",
+        "SCHOOLBOOK", "RED",
+        "MANUAL", "BLACK",
+        "", "",
+    };
+
+    int arraySize = sizeof(mas) / sizeof(mas[0]);
+
+    for (int i = 0; i < arraySize; i++) {
+        if (strstr(mas[i][0], "BOOK"))  {
+            cout << "Цвет со строкой BOOK - " << mas[i][1] << endl;
+        }
+    }
+
+    for (int i = 0; i < arraySize; i++) {
+        if (mas[i][0][0] != '\0') {
+            cout << "Предмет: " << mas[i][0] << ", Цвет: " << mas[i][1] << " Индекс " << i << endl;
+        }
+    }
+
+    return 0;
+}
