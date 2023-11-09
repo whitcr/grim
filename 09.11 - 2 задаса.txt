@@ -1,0 +1,39 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    const int I = 2, J = 20;
+    char mas[][I][J] = {
+        "BOOK",  "BLACK",
+        "COPYBOOK",  "YELLOW",
+        "PEN",   "RED",
+        "NOTEBOOK",  "WHITE",
+        "PENSIL",  "RED",
+        "PEN",   "YELLOW",
+        "TEXTBOOK",  "PINK",
+        "ERASER",  "GREEN",
+        "SCHOOLBOOK",  "RED",
+        "MANUAL",  "BLACK",
+        "",   "",
+    };
+
+    string color;
+    cout << "Введите цвет: ";
+    cin >> color;
+
+    bool found = false;
+
+    for (int i = 0; i < sizeof(mas) / sizeof(mas[0]); i++) {
+        if (mas[i][1] == color) {
+            found = true;
+            cout << "Предмет: " << mas[i][0] << ", Цвет: " << mas[i][1] << endl;
+        }
+    }
+
+    if (!found) {
+        cout << "Предметов с указанным цветом нет." << endl;
+    }
+
+    return 0;
+}
