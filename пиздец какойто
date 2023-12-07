@@ -1,0 +1,344 @@
+#include <iostream>
+#include <cstring>
+#include <time.h>
+using namespace std;
+
+#define N 10		
+#define NN 79
+
+//объявление пользовательского типа student
+struct student
+{
+    char nam[20];		//имя
+    int kurs;		//курс
+    double step;		//размер стипендии
+    int ocenka[N];	//получаемые оценки
+    int pos[N];		//посещение
+    float sr_oc;		//средняя оценка
+};
+
+void CreateFKBO(student[]);
+void PrintFKBO(student[]);
+int task1(student[]);
+void task2(student[]);
+void task3(student[]);
+void task4(student vmc[]);
+void task5(student vmc[]);
+void task6(student vmc[]);
+void task7(student vmc[]);
+void task8(student vmc[]);
+void task9(student vmc[]);
+void task10(student vmc[]);
+void task11(student vmc[]);
+void task12(student vmc[]);
+
+int main()
+{
+    student fkb[N];
+    CreateFKBO(fkb);
+    PrintFKBO(fkb);
+
+    int ind = task1(fkb);
+    cout << "Студент с максимальной средней оценкой: " << fkb[ind].nam << endl;
+
+    cout << "Студенты с средней оценкой менее 3.5: " << endl;
+    task2(fkb);
+
+    cout << "Студенты, посещавшие 5 занятие: " << endl;
+    task3(fkb);
+
+    cout << "Студенты, получившие 5 на 8-ом занятии: " << endl;
+    task4(fkb);
+
+    cout << "Студенты, получившие 3 и 4 на 4-ом занятии: " << endl;
+    task5(fkb);
+
+    cout << "Студенты, пропустившие последнее занятие: " << endl;
+    task6(fkb);
+
+    cout << "Студенты, пропустившие менее 5-и занятий: " << endl;
+    task7(fkb);
+
+    cout << "Студенты, пропустившие больше всех занятий: " << endl;
+    task8(fkb);
+
+    cout << "Студенты, учащиеся на 3 курсе: " << endl;
+    task9(fkb);
+
+    task10(fkb);
+
+    task11(fkb);
+
+    task12(fkb);
+
+
+    return 0;
+}
+
+void CreateFKBO(student vmc[])
+{
+    time_t t1;
+    srand((int)time(&t1));
+    char nam[N][20] = {
+    "Павел", "Николай", "Вадим", "Антон", "Владим",
+    "Юрий", "Сергей", "Андрей", "Ярослав", "Виктор"
+    };
+
+    for (int i = 0; i < N; i++)
+    {
+        //имя
+        strcpy(vmc[i].nam, nam[i]);
+        //курс обучения от 1 до 5
+        vmc[i].kurs = (int)(rand() % 5 + 1);
+        //стипендия от 2000 до 5000
+        vmc[i].step = (double)(rand() % 3000 + 2000);
+        //оценки от 2 до 5
+        for (int j = 0; j < N; j++) 	vmc[i].ocenka[j] = rand() % 4 + 2;
+        //посещение: 0 - пропуск, 1 - присутствие
+        for (int j = 0; j < N; j++) 	vmc[i].pos[j] = (int)rand() % 2;
+        //средняя оценка
+        vmc[i].sr_oc = 0;
+        for (int j = 0; j < N; j++) 	vmc[i].sr_oc = vmc[i].sr_oc + vmc[i].ocenka[j];
+        vmc[i].sr_oc = vmc[i].sr_oc / N;
+    }
+}
+
+void PrintFKBO(student vmc[])
+{
+    cout << "\tИсходные данные\n";
+    printf("%s\t\t%s\t%s%s\t\t\t%s\t\t%s", "имена", "курс", "стип  ", "   оценки", "посещен", "сред.оц.\n");
+    for (int i = 0; i < NN; i++)putchar('-');
+    cout << endl;
+    for (int i = 0; i < N; i++)
+    {
+        printf("%s\t%5d%9.1f\t ", vmc[i].nam, vmc[i].kurs, vmc[i].step);
+        for (int j = 0; j < N; j++) printf("%2d", vmc[i].ocenka[j]);
+        putchar('\t');
+        for (int j = 0; j < N; j++) printf("%2d", vmc[i].pos[j]);
+        printf("%9.1f\n", vmc[i].sr_oc);
+    }
+    cout << endl;
+}
+
+// 1: Найти студента, у которого максимальная средняя оценка
+int task1(student vmc[])
+{
+    int idx = 0;
+    float average = vmc[0].sr_oc;
+
+    for (int i = 1; i < N; i++)
+    {
+        if (vmc[i].sr_oc > average)
+        {
+            average = vmc[i].sr_oc;
+            idx = i;
+        }
+    }
+
+    return idx;
+}
+
+// 2: Определить имена студентов, у которых средняя оценка меньше 3.5
+void task2(student vmc[])
+{
+    for (int i = 0; i < N; i++)
+    {
+        if (vmc[i].sr_oc < 3.5)
+        {
+            cout << vmc[i].nam << endl;
+        }
+    }
+}
+
+// 3: Определить имена студентов, кто посещал 5 занятие
+void task3(student vmc[])
+{
+    for (int i = 0; i < N; i++)
+    {
+        if (vmc[i].pos[4] == 1)  
+        {
+            cout << vmc[i].nam << endl;
+        }
+    }
+}
+
+// 4: Определить имена студентов, кто на 8-ом занятии получил 5
+void task4(student vmc[])
+{
+    for (int i = 0; i < N; i++)
+    {
+        if (vmc[i].ocenka[7] == 5)  
+        {
+            cout << vmc[i].nam << endl;
+        }
+    }
+}
+
+// 5: Определить имена студентов, кто на 4 занятии получил 3 и 4
+void task5(student vmc[])
+{
+    for (int i = 0; i < N; i++)
+    {
+        if (vmc[i].ocenka[3] == 3 || vmc[i].ocenka[3] == 4)  
+        {
+            cout << vmc[i].nam << endl;
+        }
+    }
+}
+
+// 6: Определить имена студентов, кто прогулял последнее занятие
+void task6(student vmc[])
+{
+    for (int i = 0; i < N; i++)
+    {
+        if (vmc[i].pos[N - 1] == 0)  
+        {
+            cout << vmc[i].nam << endl;
+        }
+    }
+}
+
+// 7: Определить имена студентов, кто прогулял менее 5-и занятий
+void task7(student vmc[])
+{
+    for (int i = 0; i < N; i++)
+    {
+        int count = 0;
+        for (int j = 0; j < N; j++)
+        {
+            if (vmc[i].pos[j] == 0)
+            {
+                count++;
+            }
+        }
+        if (count < 5)
+        {
+            cout << vmc[i].nam << endl;
+        }
+    }
+}
+
+// 8: Определить имена студентов, кто больше всех пропустил занятия
+void task8(student vmc[])
+{
+    int maxCount = 0;
+
+ 
+    for (int i = 0; i < N; i++)
+    {
+        int Count = 0;
+        for (int j = 0; j < N; j++)
+        {
+            if (vmc[i].pos[j] == 0)
+            {
+                Count++;
+            }
+        }
+        if (Count > maxCount)
+        {
+            maxCount = Count;
+        }
+    }
+
+    for (int i = 0; i < N; i++)
+    {
+        int Count = 0;
+        for (int j = 0; j < N; j++)
+        {
+            if (vmc[i].pos[j] == 0)
+            {
+                Count++;
+            }
+        }
+        if (Count == maxCount)
+        {
+            cout << vmc[i].nam << endl;
+        }
+    }
+}
+
+// 9: Определить имена студентов, кто учится на 3 курсе
+void task9(student vmc[])
+{
+    for (int i = 0; i < N; i++)
+    {
+        if (vmc[i].kurs == 3)
+        {
+            cout << vmc[i].nam << endl;
+        }
+    }
+}
+
+// 10: Отсортировать массив по убыванию средних оценок. Распечатать имена и средние оценки
+void task10(student vmc[])
+{
+ 
+    for (int i = 0; i < N - 1; i++)
+    {
+        for (int j = 0; j < N - i - 1; j++)
+        {
+            if (vmc[j].sr_oc < vmc[j + 1].sr_oc)
+            {
+                swap(vmc[j], vmc[j + 1]);
+            }
+        }
+    }
+
+ 
+    cout << "Отсортированный массив по убыванию средних оценок:" << endl;
+    cout << "\tИмена\t\t\tСредние оценки" << endl;
+    for (int i = 0; i < N; i++)
+    {
+        printf("%s\t\t\t\t%.1f\n", vmc[i].nam, vmc[i].sr_oc);
+    }
+    cout << endl;
+}
+
+// 11: Распечатать массив по возрастанию первых букв имен, распечатать только имена
+void task11(student vmc[])
+{
+ 
+    for (int i = 0; i < N - 1; i++)
+    {
+        for (int j = 0; j < N - i - 1; j++)
+        {
+            if (strcmp(vmc[j].nam, vmc[j + 1].nam) > 0)
+            {
+                swap(vmc[j], vmc[j + 1]);
+            }
+        }
+    }
+
+ 
+    cout << "Массив по возрастанию первых букв имен:" << endl;
+    for (int i = 0; i < N; i++)
+    {
+        cout << vmc[i].nam << endl;
+    }
+    cout << endl;
+}
+
+// 12: Отсортировать массив по возрастанию курсов, распечатать имена и курсы.
+void task12(student vmc[])
+{
+ 
+    for (int i = 0; i < N - 1; i++)
+    {
+        for (int j = 0; j < N - i - 1; j++)
+        {
+            if (vmc[j].kurs > vmc[j + 1].kurs)
+            {
+                swap(vmc[j], vmc[j + 1]);
+            }
+        }
+    }
+
+ 
+    cout << "Отсортированный массив по возрастанию курсов:" << endl;
+    cout << "\tИмена\t\tКурсы" << endl;
+    for (int i = 0; i < N; i++)
+    {
+        printf("%s\t\t\t%d\n", vmc[i].nam, vmc[i].kurs);
+    }
+    cout << endl;
+}
