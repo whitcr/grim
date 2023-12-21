@@ -1,0 +1,56 @@
+#include <iostream>
+#include <cstring>
+#include <fstream>
+using namespace std;
+
+int main() {
+    
+    char arr[1000] =
+		"This module defines the internal NT APIs and data structures that are intended for the use only by internal core.Windows components.These APIs and data structures may change at any time.These APIs and data structures are subject to changes from one.Windows release to another Windows release.To maintain the compatiblity of your application, avoid using these APIs and data structures.The appropriate mechanism for accessing the functions defined in this header is to use LoadLibrary() for ntdll_dll and GetProcAddress() for the particular function.By using this approach, your application will be more resilient to changes or these functions between Windows releases.If a function prototype does change, then GetProcAddress() for that function might detect the change and fail the function call, which your application will be able to detect.";
+
+	FILE* ff;
+
+	ff = fopen("functions.txt", "wb");
+
+	if (!ff) {
+		printf("Файл functions для записи отсутствует или неправильное имя файла!");
+		return 1;
+	}
+
+	fwrite(arr, sizeof(char), strlen(arr), ff);
+
+	fclose(ff);
+
+    // char word[1000];
+
+    // string name;
+    // cout << "\nВведите имя нового файла: ";
+    // cin >> name;
+
+    // ofstream newFile(name);
+    // if (!newFile.is_open()) {
+    //     cout << "Ошибка при создании файла " << endl;
+    //     return 1;
+    // }
+
+    // ifstream file("functions.txt");
+    // if (!file.is_open()) {
+    //     cout << "Ошибка при открытии файла" << endl;
+    //     return 1;
+    // }
+
+    // while (file >> word) {
+    //     if (word[0] == 'a' || word[0] == 'A') {
+    //         newFile << "\"" << word << "\" ";
+    //     } else {
+    //         newFile << word << " ";
+    //     }
+    // }
+
+    // file.close();
+    // newFile.close();
+
+    // return 0;
+    
+}
+
