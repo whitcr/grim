@@ -1,0 +1,50 @@
+#include <iostream>
+
+using namespace std;
+
+void zeroReset(int A[], int size, int average);
+
+int main() {
+    const int size = 40;
+    int A[size];
+
+    for (int i = 0; i < size; ++i) {
+        A[i] = rand() % 21 + 20;
+    }
+    
+    cout << "Исходный массив\n";
+    for (int i = 0; i < size; ++i) {
+        cout << A[i] << " ";
+        if ((i + 1) % 8 == 0) {
+            cout << "\n";
+        }
+    }
+    
+    int sum = 0;
+    for (int i = 0; i < size; ++i) {
+        sum += A[i];
+    }
+    int average = sum / size;
+
+    
+    zeroReset (A, size, average);
+
+    cout << "\nПолученный массив\n";
+    for (int i = 0; i < size; ++i) {
+        cout << A[i] << " ";
+        if ((i + 1) % 8 == 0) {
+            cout << "\n";
+        }
+    }
+
+    return 0;
+}
+
+void zeroReset(int A[], int size, int average) {
+    
+    for (int i = 0; i < size; ++i) {
+        if (A[i] > average) {
+            A[i] = 0;
+        }
+    }
+}
